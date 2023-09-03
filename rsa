@@ -1,0 +1,73 @@
+#!/usr/bin/python3
+import sys, time
+
+def is_prime_number(number):
+    """
+    Check of the number is prime
+    Args:
+        number: integr
+    Return: True if is prime, False if NOT
+    """
+    if number <= 1:
+        return False
+    for i in range(2, int((number**0.5) + 1)):
+        if number % i == 0:
+            return False
+    return True
+
+def factorize(number):
+    """
+    Take a number
+    Args:
+        number: integer
+    Return: A tuple of two prime factors if they exist.
+        None if the number is prime or has no prime factors
+    """
+    for i in range(2, int((number**0.5) + 1)):
+        if number % i == 0 and is_prime_number(i) and is_prime_number(number // i):
+            return (i, number // i)
+    return None
+
+if __name__ == "__main__":
+
+    """
+    Read the number in file
+    """
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        exit()
+
+    filename = sys.argv[1]
+
+    try:
+        with open(filename, 'r') as file:
+            number = int(file.readline().strip())
+    except FileNotFoundError:
+        print("Error: file not found")
+        exit()
+    except ValueError:
+        print("Error: Invalid input")
+        exit()
+
+    start_time = time.time()
+    """
+    Loop over each line in the file which contains a natural number
+    call factorize def for each number
+    """
+    factors = factorize(number)
+    if factors:
+        print("{:d}={:d}*{:d}".format(number, factors[0], factors[1]))
+    else:
+        print("No prime factors found")
+
+    """
+    If excute of the program pass 5 seconds,
+    the program exit with an error message
+    """
+    if time.time() - start_time > 5:
+        print("Error: Time limit exceeded")
+        exit()
+
+print()
+elapse_time = time.time() - start_time
+print(f"Execution time: {elapse_time:.3f} seconds")
