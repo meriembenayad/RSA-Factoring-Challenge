@@ -41,7 +41,11 @@ if __name__ == "__main__":
     call factorize def for each number
     """
     for line in lines:
-        number = int(line.strip())
+        try:
+            number = int(line.strip())
+        except ValueError:
+            print("Error: Invalid input")
+            continue
         factors = factorize(number)
         if factors:
             print("{:d}={:d}*{:d}".format(number, factors[0], factors[1]))
