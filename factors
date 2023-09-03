@@ -11,11 +11,9 @@ def factorize(number):
         Return: A tuple of two factors if number is pair.
             None if the number is prime
     """
-    """ Print the number that beigng factorized """
     for i in range(2, int((number**0.5) + 1)):
         if number % i == 0:
-            factors = (i, number // i)
-            return factors
+            return (i, number // i)
     """ Print a message if no factors were found """
     return None
 
@@ -35,7 +33,7 @@ if __name__ == "__main__":
         with open(filename, "r") as file:
             lines = file.readlines()
     except FileNotFoundError:
-        raise FileNotFoundError("Error: file not found")
+        print("Error: file not found")
         exit()
 
     start_time = time.time()
@@ -47,12 +45,15 @@ if __name__ == "__main__":
         number = int(line.strip())
         factors = factorize(number)
         if factors:
-            print("{:d} = {:d} * {:d}".format(number, factors[0], factors[1]))
+            print("{:d}={:d}*{:d}".format(number, factors[0], factors[1]))
 
-    """
-    If excute of the program pass 5 seconds,
-    the program exit with an error message
-    """
-    if time.time() - start_time > 5:
-        raise TimeoutError("Error: Time limit exceeded")
-        exit()
+        """
+        If excute of the program pass 5 seconds,
+        the program exit with an error message
+        """
+        if time.time() - start_time > 5:
+            print("Error: Time limit exceeded")
+            exit()
+    print()
+    elapse_time = time.time() - start_time
+    print(f"Execution time: {elapse_time:.3f} seconds")
