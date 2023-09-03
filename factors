@@ -14,7 +14,6 @@ def factorize(number):
     for i in range(2, int((number**0.5) + 1)):
         if number % i == 0:
             return (i, number // i)
-    """ Print a message if no factors were found """
     return None
 
 
@@ -30,7 +29,7 @@ if __name__ == "__main__":
     filename = sys.argv[1]
 
     try:
-        with open(filename, "r") as file:
+        with open(filename, 'r') as file:
             lines = file.readlines()
     except FileNotFoundError:
         print("Error: file not found")
@@ -54,6 +53,6 @@ if __name__ == "__main__":
         if time.time() - start_time > 5:
             print("Error: Time limit exceeded")
             exit()
-    print()
-    elapse_time = time.time() - start_time
-    print(f"Execution time: {elapse_time:.3f} seconds")
+print()
+elapse_time = time.time() - start_time
+print(f"Execution time: {elapse_time:.3f} seconds")
